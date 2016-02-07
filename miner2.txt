@@ -1,0 +1,301 @@
+digDepth = 10
+digSize = 16
+x=0
+y=0
+z=0
+
+tryDigMove=function()
+ local tempCounter = 20
+while not turtle.forward() and tempCounter > 0 do
+ turtle.dig()
+tempCounter  = tempCounter - 1
+~end
+if tempCounter == 0 then
+ return false
+else
+ return true
+~end
+~end
+
+tryMove=function()
+ local tempCounter = 20
+while not turtle.forward() and tempCounter > 0 do
+ --turtle.dig()
+tempCounter  = tempCounter - 1
+~end
+if tempCounter == 0 then
+ return false
+else
+ return true
+~end
+~end
+
+
+
+--start right on bottom left corner one layer up from target layer
+--the layer directly above has been cleared so no falling stuff can occur
+digLayerT=function()
+ turtle.turnRight()
+ turtle.tryDigMove()
+tryMove()
+turtle.digDown()
+turtle.turnLeft()
+turtle.down()
+
+while x < digSize do 
+ while y < digSize do
+ turtle.turnLeft()
+turtle.dig()
+turtle.turnRight()
+turtle.turnRight()
+turtle.dig()
+turtle.turnLeft()
+turtle.dig()
+tryMove()
+y = y + 1
+~end
+
+turtle.turnLeft()
+turtle.dig()
+turtle.turnRight()
+turtle.turnRight()
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+turtle.turnRight()
+
+
+while y > 0 do
+ turtle.turnLeft()
+turtle.dig()
+turtle.turnRight()
+turtle.turnRight()
+turtle.dig()
+turtle.turnLeft()
+turtle.dig()
+tryMove()
+y = y - 1
+~end
+
+turtle.turnRight()
+turtle.dig()
+turtle.turnLeft()
+turtle.turnLeft()
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+turtle.turnLeft()
+
+~end
+
+
+turtle.turnLeft()
+while x > 0 do
+ tryMove()
+x = x - 1
+~end
+tryMove()
+turtle.turnRight()
+
+~end
+
+digTop=function()
+ tempBreaker = 0
+local tempCounter = 20
+while x < digSize+5 do
+ while y < digSize do
+ if tryDigMove() then
+ y = y + 1
+~end
+~end
+
+turtle.turnRight()
+
+if tryDigMove() then
+ x = x + 1 
+~end
+
+turtle.turnRight()
+
+while y > 0 do
+ if tryDigMove() then
+ y = y - 1
+~end
+~end
+
+turtle.turnLeft()
+
+if tryDigMove() then
+ x = x + 1 
+~end
+
+turtle.turnLeft()
+
+
+
+~end
+local tempcounter = 0
+turtle.turnLeft()
+while x > 0 and tempcounter < 10 do
+ if tryDigMove() then
+ x = x - 1 
+~end
+~end
+turtle.turnRight()
+
+return tempcounter
+~end
+
+
+dropAll=function()
+ local spot = 2 
+while spot < 17 do
+ turtle.select(spot)
+turtle.dropUp()
+spot = spot + 1
+~end
+turtle.select(1)
+~end
+
+refuel=function()
+ amountNeeded = digSize * digSize + digDepth * 4
+turtle.select(1)
+while turtle.getFuelLevel() < amountNeeded do
+ turtle.refuel(1)
+~end
+~end
+
+--start right on bottom left corner one layer up from target layer
+--the layer directly above has been cleared so no falling stuff can occur
+digLayer=function()
+ turtle.turnRight()
+tryMove()
+turtle.digDown()
+turtle.turnLeft()
+turtle.down()
+
+while x < digSize do 
+ while y < digSize do
+ turtle.turnLeft()
+turtle.dig()
+turtle.turnRight()
+turtle.turnRight()
+turtle.dig()
+turtle.turnLeft()
+turtle.dig()
+tryMove()
+y = y + 1
+~end
+
+turtle.turnLeft()
+turtle.dig()
+turtle.turnRight()
+turtle.turnRight()
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+turtle.turnRight()
+
+
+while y > 0 do
+ turtle.turnLeft()
+turtle.dig()
+turtle.turnRight()
+turtle.turnRight()
+turtle.dig()
+turtle.turnLeft()
+turtle.dig()
+tryMove()
+y = y - 1
+~end
+
+turtle.turnRight()
+turtle.dig()
+turtle.turnLeft()
+turtle.turnLeft()
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+tryMove()
+x = x + 1
+turtle.dig()
+turtle.turnLeft()
+
+~end
+
+
+turtle.turnLeft()
+while x > 0 do
+ tryMove()
+x = x - 1
+~end
+tryMove()
+turtle.turnRight()
+
+~end
+
+digAll=function()
+ refuel()
+turtle.refuel(3)
+if digTop() < 10 then
+ local curZ = 0
+refuel()
+dropAll()
+while curZ < digDepth do
+ digLayer()
+curZ = curZ + 1
+z = z + 1
+while z > 0 do
+ turtle.up()
+z = z - 1
+~end
+
+refuel()
+dropAll()
+
+while z < curZ do
+ turtle.down()
+z = z + 1
+~end
+
+
+~end
+
+while z > 0 do
+ turtle.up()
+z = z - 1
+~end
+
+dropAll()
+~end
+
+~end
+
+digAll()
+ 
+

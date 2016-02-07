@@ -1,0 +1,44 @@
+
+goUp=function()
+ y = 0
+while turtle.detect() do
+ turtle.digUp()
+y = y + 1
+turtle.up()
+~end
+~end
+
+digLayer=function()
+ turtle.dig()
+~end
+
+digAll=function()
+ while y > 0 do
+ digLayer()
+turtle.down()
+y = y - 1
+~end
+~end
+
+cutOne=function()
+ turtle.select(2)
+print("AfterLoop")
+goUp()
+print("AfterUP")
+digAll()
+digLayer()
+--replant()
+~end
+
+getFuel=function()
+ turtle.select(3)
+turtle.refuel(10)
+turtle.select(2)
+~end
+
+
+print("Start")
+getFuel()
+
+print("AfterFuel")
+cutOne()

@@ -1,0 +1,73 @@
+
+goUp=function()
+ y = 0
+while turtle.compare() do
+ turtle.digUp()
+y = y + 1
+turtle.up()
+~end
+~end
+
+digLayer=function()
+ turtle.dig()
+turtle.forward()
+turtle.dig()
+turtle.turnRight()
+turtle.dig()
+turtle.forward()
+turtle.turnLeft()
+turtle.dig()
+turtle.turnLeft()
+turtle.forward()
+turtle.turnRight()
+turtle.back()
+~end
+
+digAll=function()
+ while y > 0 do
+ digLayer()
+turtle.down()
+y = y - 1
+~end
+~end
+
+cutOne=function()
+ turtle.select(2)
+while not turtle.compare() do
+ os.sleep(20)
+~end
+print("AfterLoop")
+goUp()
+print("AfterUP")
+digAll()
+digLayer()
+replant()
+~end
+
+getFuel=function()
+ turtle.select(3)
+turtle.refuel(5)
+turtle.select(2)
+~end
+
+replant=function()
+ turtle.select(1)
+turtle.forward()
+turtle.place()
+turtle.turnRight()
+turtle.forward()
+turtle.turnLeft()
+turtle.place()
+turtle.turnRight()
+turtle.back()
+turtle.place()
+turtle.turnLeft()
+turtle.back()
+turtle.place()
+~end
+
+print("Start")
+getFuel()
+
+print("AfterFuel")
+cutOne()

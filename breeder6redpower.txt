@@ -1,0 +1,64 @@
+VARIABLE fuelcolor 
+VARIABLE icecolor 
+VARIABLE shutoffcolor 
+VARIABLE delaytime 
+VARIABLE emptycolor
+
+6 delaytime !
+32 shutoffcolor !
+16384 icecolor !
+16 fuelcolor !
+8192 emptycolor !
+
+: react 
+BEGIN IOX@ 1 AND 0< UNTIL
+
+
+
+
+
+shutoffcolor @ IOXSET
+
+54 0 DO
+delaytime @ TICKS
+emptycolor @ IOXSET
+delaytime @ TICKS
+emptycolor @ IOXRST
+LOOP
+
+
+5 0 DO
+
+8 0 DO
+delaytime @ TICKS
+fuelcolor @ IOXSET
+delaytime @ TICKS
+fuelcolor @ IOXRST
+LOOP
+
+delaytime @ TICKS
+icecolor @ IOXSET
+delaytime @ TICKS
+icecolor @ IOXRST
+
+LOOP
+
+7 0 DO
+delaytime @ TICKS
+fuelcolor @ IOXSET
+delaytime @ TICKS
+fuelcolor @ IOXRST
+LOOP
+
+delaytime @ TICKS
+icecolor @ IOXSET
+delaytime @ TICKS
+icecolor @ IOXRST
+
+delaytime @ TICKS
+icecolor @ IOXSET
+delaytime @ TICKS
+icecolor @ IOXRST
+
+shutoffcolor @ IOXRST
+;

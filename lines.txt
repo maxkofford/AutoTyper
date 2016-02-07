@@ -1,0 +1,46 @@
+Functionname=function()
+  --Do stuff
+end
+
+turtle.up()
+turtle.down()
+turtle.back()
+turtle.forward()
+turtle.turnLeft()
+turtle.turnRight()
+
+turtle.dig()
+turtle.digUp()
+turtle.digDown()
+turtle.compare()
+
+turtle.select()
+turtle.refuel()
+turtle.getFuelLevel()
+turtle.drop()
+
+
+ local Variable = 1
+ if Variable==1 then
+   write("The variable is 1!\n")
+ end
+ if Variable==2 then
+   write("The variable is 2!\n")
+ end
+
+
+
+ for i=1,10 do
+  print( "i is "..tostring(i) )
+ end
+
+
+ turtle.dig()
+ turtle.forward()
+ while turtle.detectUp() do
+   turtle.digUp()
+   turtle.up()
+ end
+ while not turtle.detectDown() do
+   turtle.down()
+ end
